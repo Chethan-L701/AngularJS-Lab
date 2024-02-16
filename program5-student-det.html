@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <div class="container">
+            <!--Add button and needed inputs to add new student into the table-->
+            <div class="options">
+                <button ng-click="addStudent()">Add New Student</button>
+                <input type="text" ng-model="newStudent.name" />
+                <input type="text" ng-model="newStudent.cgpa" />
+            </div>
+            <!--A table that details the details of the students from the student list with only 3 entries (sno: index of the entry in the list, name , cgpa) and then add toggle button to show/hide the table -->
+            <div class="options">
+                <button ng-click="toggleTable()">Toggle Table</button>
+            </div>
+            <table class="items-table" ng-show="showTable">
+                <tr>
+                    <th>Sno</th>
+                    <th>Name</th>
+                    <th>Cgpa</th>
+                </tr>
+                <tr ng-repeat="x in studentList">
+                    <th>{{$index + 1}}</th>
+                    <th>{{x.name}}</th>
+                    <th>{{x.cgpa}}</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", ["$scope", function ($scope) {
+            $scope.studentList = [
+                { name: "John", cgpa: 9.5 },
+                { name: "Jane", cgpa: 8.5 },
+                { name: "Jim", cgpa: 7.5 }
+            ];
+            $scope.toggleTable = function () {
+                $scope.showTable = !$scope.showTable;
+            }
+            $scope.addStudent = function () {
+                $scope.studentList.push($scope.newStudent);
+                $scope.newStudent = {};
+            }
+
+        }]);
+    </script>
+ 
+</body>
+</html>

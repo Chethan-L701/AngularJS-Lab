@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body>
+    <!-- Create a task manager with a list of tasks and 
+        a button to add a new task, and 
+        a button to delete the last task, 
+        edit the task title and 
+        check box to complete the task.-->
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <div class="container">
+            <!--Table with column for task title and sno the staus of the task in check box, a edit button to edit the task title and a delete button to delete the task    -->
+            <table class="items-table" style="width:60%; padding:20px;gap:10px;column-gap:10px">
+                <tr>
+                    <th>Sno</th>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr ng-repeat="x in taskList">
+                    <th>{{$index + 1}}</th>
+                    <th>{{x.task}}</th>
+                    <th><input type="checkbox" ng-model="x.status"></th>
+                    <th><button ng-click="editTask($index)">Edit</button></th>
+                    <th><button ng-click="deleteTask($index)">Delete</button></th>
+                </tr>
+            </table>
+            <!--Add button and needed inputs to add new task into the table-->
+            <div class="options">
+                <input type="text" ng-model="newTask.task" />
+                <button ng-click="addTask()">Add Task</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", ["$scope", function ($scope) {
+            $scope.taskList = [
+                { task: "Task 1", status: false },
+                { task: "Task 2", status: false },
+                { task: "Task 3", status: false }
+            ];
+            $scope.newTask = {};
+            $scope.addTask = function () {
+                $scope.taskList.push($scope.newTask);
+                $scope.newTask = {};
+            }
+            $scope.editTask = function (index) {
+                // create new input and take the new name for the task on enter
+                var newTask = prompt("Enter new task name", $scope.taskList[index].task);
+                if (newTask != null) {
+                    $scope.taskList[index].task = newTask;
+                }
+            }
+            $scope.deleteTask = function (index) {
+                $scope.taskList.splice(index, 1);
+            }
+        }]);
+    </script>
+</body>
+
+</html>

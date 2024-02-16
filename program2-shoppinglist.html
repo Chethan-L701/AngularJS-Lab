@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        .options {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            width:40%
+        }
+        .items-table {
+            width: 40%;
+            border: solid 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <div class="container">
+            <!--table to display items in the shopping list index and item-->
+            <table class="items-table">
+                <tr>
+                    <th>Index</th>
+                    <th>Item</th>
+                </tr>
+                <tr ng-repeat="x in items">
+                    <th>{{$index}}</th>
+                    <th>{{x}}</th>
+                </tr>
+            </table>
+            <div class="options">
+                <!--Input box to add items-->
+                Add New Item : <input type="text" ng-model="newItem" />
+                <button ng-click="addItem()">Add Item</button><br />
+                <!-- Add a selection box to remove items-->
+                Remove Item : <select ng-model="selectedItem">
+                    <option ng-repeat="x in items">{{x}}</option>
+                </select>
+                <button ng-click="removeItem()">Remove Item</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", ["$scope", function ($scope) {
+            $scope.items = [
+                "Apple", "Banana", "Orange", "Mango", "Grapes",
+            ];
+
+            $scope.addItem = function () {
+                $scope.items.push($scope.newItem);
+                $scope.newItem = "";
+            };
+            $scope.removeItem = function () {
+                var index = $scope.items.indexOf($scope.selectedItem);
+                $scope.items.splice(index, 1);
+            };
+        }]);
+    </script>
+</body>
+
+</html>

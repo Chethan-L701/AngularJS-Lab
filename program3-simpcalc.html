@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl" oninput="calculate()">
+        <div class="container">
+            <!--calculator with two input box for operands and an options list with +, -, *, % and / -->
+            <input type="text" ng-model="operand1" />
+            <select ng-model="operator">
+                <option>+</option>
+                <option>-</option>
+                <option>*</option>
+                <option>%</option>
+                <option>/</option>
+            </select>
+            <input type="text" ng-model="operand2" oninput="calculate()"/>
+            <button ng-click="calculate()">Calculate</button>
+            <h1>{{result}}</h1>
+        </div>
+    </div>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", ["$scope", function ($scope) {
+            $scope.operand1 = 0;
+            $scope.operand2 = 0;
+            $scope.operator = "+";
+            $scope.result = 0;
+            $scope.calculate = function () {
+                if ($scope.operator == "+") {
+                    $scope.result = parseInt($scope.operand1) + parseInt($scope.operand2);
+                } else if ($scope.operator == "-") {
+                    $scope.result = parseInt($scope.operand1) - parseInt($scope.operand2);
+                } else if ($scope.operator == "*") {
+                    $scope.result = parseInt($scope.operand1) * parseInt($scope.operand2);
+                } else if ($scope.operator == "%") {
+                    $scope.result = parseInt($scope.operand1) % parseInt($scope.operand2);
+                } else if ($scope.operator == "/") {
+                    $scope.result = parseInt($scope.operand1) / parseInt($scope.operand2);
+                }
+            };
+        }]);
+    </script>
+</body>
+</html>
