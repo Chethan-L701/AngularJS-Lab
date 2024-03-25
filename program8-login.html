@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        .error {
+            background-color: red;
+            color: white;
+            border: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <form name="loginform">
+            <label for="username">Username : <input type="text" name="username" ng-model="username"></label> <br>
+            <label for="password">Password : <input type="password" name="password" ng-model="password" ng-minlength="3"
+                    ng-maxlength="8"></label> <br>
+            <span class="error" ng-show="loginform.username.$error.required">Username is
+                required</span>
+            <span class="error" ng-show="loginform.password.$error.minlength">Password should be at least 3 characters
+                long</span>
+            <span class="error" ng-show="loginform.password.$error.maxlength">Password should be at most 8 characters
+                long</span>
+            <input type="submit" value="Submit" ng-click="login()">
+        </form>
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", ["$scope", function ($scope) {
+            $scope.username = "";
+            $scope.password = "";
+            $scope.login = function () {
+                if ($scope.loginform.$valid && ($scope.username=="chethanl" && $scope.password=="123456")) {
+                    alert("Login Successful");
+                }
+                else {
+                    alert("Login Failed");
+                }
+            }
+        }]);
+    </script>
+</body>
+
+</html>

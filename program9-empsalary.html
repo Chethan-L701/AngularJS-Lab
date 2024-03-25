@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Employee salary</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="empApp" ng-controller="empCtrl">
+        <h2>List of employes with there salary</h2>
+        <table>
+            <tr>
+                <th>Indes</th>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+            <tr ng-repeat="x in empList | filter:{name:name} | filter:{salary : salary}">
+                <td>{{$index}}</td>
+                <td>{{x.name}}</td>
+                <td>{{x.salary}}</td>
+            </tr>
+        </table>
+        <div>
+            <span>Enter the name : <input type="text" ng-model="name"></span> <br>
+            <span>Enter the salary : <input type="text" ng-model="salary"></span>
+        </div>
+    </div>
+    <script>
+        var app = angular.module("empApp", []);
+        app.controller("empCtrl", ["$scope", function ($scope) {
+            $scope.empList = [
+                { name: "John", salary: 50000 },
+                { name: "Jane", salary: 40000 },
+                { name: "Jim", salary: 30000 },
+                { name: "Jill", salary: 20000 }
+            ];
+        }]);
+    </script>
+</body>
+
+</html>

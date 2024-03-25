@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Case Toggle</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        th, td {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+        <h2>Case Toggle</h2>
+
+        <table style="padding: 10px;">
+            <tr>
+                <th>SNO</th>
+                <th ng-show="upper">UPPERCASE NAME</th>
+                <th ng-show="lower">LOWERCASE NAME</th>
+            </tr>
+            <tr ng-repeat="name in names">
+                <td>{{$index+1}}</td>
+                <td ng-show="upper">{{name | uppercase}}</td>
+                <td ng-show="lower">{{name | lowercase}}</td>
+            </tr>
+        </table>
+        <div>
+            <!--grouped radio button to toggle upper and the lower case-->
+            upper case <input type="checkbox" ng-model="upper" name="case"> <br>
+            lower case <input type="checkbox" ng-model="lower" name="case">
+        </div>
+
+    </div>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", ["$scope", function ($scope) {
+            $scope.names = ["John", "jane", "Jim", "Jill"];
+            $scope.upper = true
+        }])
+    </script>
+</body>
+
+</html>

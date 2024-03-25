@@ -45,7 +45,8 @@
                 $scope.showTable = !$scope.showTable;
             }
             $scope.addStudent = function () {
-                $scope.studentList.push($scope.newStudent);
+                if (($scope.newStudent.name != "" && $scope.newStudent.cgpa != "")) 
+                    $scope.studentList.push($scope.newStudent);
                 $scope.newStudent = {};
             }
 
