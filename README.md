@@ -18,7 +18,7 @@
 -   [Program 6 - Task Manager](./program6-taskmanager.html) :
     A task manager that display the task and the status of the task in table format, the user can chage the task title , delete a task , add new task and mark the completion of the task.
 
--   [Program 7 - ] : WIP
+-   [Program 7 - Show CRUD Operations](./program7-CRUD.html) : A program to show CRUD operations, in table format. 
 
 -   [Program 8 - Login Page](./program8-login.html) : Login page that check for the password lengths and username exists or not, to sign in.
 

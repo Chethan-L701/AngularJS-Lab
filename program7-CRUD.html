@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <h2>DATA MANAGEMENT APP</h2>
+        <table ng-show="showDet">
+            <tr>
+                <th>INDEX</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>EDIT</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+
+            <tr ng-repeat="x in details">
+                <td>{{$index + 1}}</td>
+                <td>{{x.name}} <input ng-show="x.edit" type="text" ng-model="x.name"></td>
+                <td>{{x.email}} <input ng-show="x.edit" type="text" ng-model="x.email"></td>
+                <td><button ng-click="edit($index)">read</button></td>
+                <td><button ng-click="update($index)">update</button></td>
+                <td><button ng-click="delete($index)">delete</button></td>
+            </tr>
+        </table>
+        <button ng-click="showDetails()">show details</button>
+        <hr />
+        <div>
+            Name : <input type="text" ng-model="name"><br>
+            Email : <input type="text" ng-model="email"><br>
+            <button ng-click="create()">Create</button>
+        </div>
+    </div>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller('myCtrl',["$scope", function ($scope) {
+            $scope.details = [
+                { name: "Chethan", email: "JpXqJ@example.com", edit: false },
+                { name: "Chethan", email: "JpXqJ@example.com", edit: false },
+                { name: "Chethan", email: "JpXqJ@example.com", edit: false },
+                { name: "Chethan", email: "JpXqJ@example.com", edit: false },
+                { name: "Chethan", email: "JpXqJ@example.com", edit: false },
+                { name: "Chethan", email: "JpXqJ@example.com", edit: false },
+                { name: "Chethan", email: "JpXqJ@example.com", edit: false },
+            ];
+            $scope.showDet = false;
+            $scope.create = function () {
+                $scope.details.push({ name: $scope.name, email: $scope.email });
+                $scope.name = "";
+                $scope.email = "";
+            };
+            $scope.edit = function (index) {
+                $scope.details[index].edit = false;
+            };
+            $scope.update = function (index) {
+                $scope.details[index].edit = true;
+            };
+            $scope.delete = function (index) {
+                $scope.details.splice(index, 1);
+            };
+            $scope.showDetails = function () {
+                $scope.showDet = true;
+            };
+        }]);
+    </script>
+</body>
+
+</html>
